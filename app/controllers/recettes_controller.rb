@@ -15,15 +15,18 @@ class RecettesController < ApplicationController
     @recette=Recette.new(recette_params)
     @recette.user=current_user
     if @recette.save
-      redirect_to @recette
+      redirect_to @recette, notice: "Recette créée avec succès"
     else
       render "new"
     end
   end
 
+  def edit
+  end
+
   def update
     if @recette.update(recette_params)
-      redirect to @recette
+      redirect to @recette, notice: "Recette mise à jour avec succès"
     else
       render "edit"
     end
@@ -31,11 +34,15 @@ class RecettesController < ApplicationController
 
   def destroy
     @recette.destroy
-    redirect to recettes_path
+    redirect_to recettes_path(@recette)
   end
 
   private
   def set_recette
-    (params[:id])
+    @recette = Recette.find(params[:id])
+  end
+
+  def car_params
+    params.require(:recette).permit(:nom, :description, :categorie, :durée, :pays, :ingredients, :préparation, :photo_url)
   end
 end
