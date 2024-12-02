@@ -1,6 +1,6 @@
 <h1>Votre générateur de recettes !</h1>
 
-<%= form_with url: recettes_proposition_path, method: :post, local: true do %>
+<%= form_with url: recipes_path, method: :post, local: true do %>
   <div>
     <%= label_tag :ingredients, "Rentrez vos ingredients (comma separated):" %>
     <%= text_area_tag :ingredients, nil, rows: 5 %>
@@ -11,10 +11,10 @@
     <%= select_tag :difficulty, options_for_select(["Facile", "Moyenne", "Difficile"]) %>
   </div>
 
-  <%= submit_tag "Suggest Recipes" %>
+  <%= submit_tag "Voici les recettes proposées" %>
 <% end %>
 
 <% if @recipe %>
   <h2>Suggested Recipe:</h2>
-  <p><%= @recipe %></p>
+
 <% end %>
