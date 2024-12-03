@@ -1,20 +1,37 @@
-<h1>Votre générateur de recettes !</h1>
+<div class="container custom-container">
+  <div class="row w-100">
+    <!-- Section Vidéo -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="video-container w-100">
+        <video controls class="w-100 rounded">
+          <source src="your-video-file.mp4" type="video/mp4">
 
-<%= form_with url: recipes_path, method: :post, local: true do %>
-  <div>
-    <%= label_tag :ingredients, "Rentrez vos ingredients (comma separated):" %>
-    <%= text_area_tag :ingredients, nil, rows: 5 %>
-  </div>
+        </video>
+        <p class="text-center mt-2">Découvrez nos meilleures recettes !</p>
+      </div>
+    </div>
 
-  <div>
+    <div class="col-md-6">
+      <div class="form-container">
+        <h1 class="form-title text-center">Votre générateur de recettes intelligent !</h1>
+        <%= form_with url: recipes_path, method: :post, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :ingredients, "Ingrédients : " %>
+            <%= form.text_field :ingredients, class: "form-control", placeholder: "Entrez vos ingrédients" %>
+          </div>
+          <div class="difficulty-option">
     <%= label_tag :difficulty, "Selectionnez la difficulté:" %>
     <%= select_tag :difficulty, options_for_select(["Facile", "Moyenne", "Difficile"]) %>
   </div>
 
-  <%= submit_tag "Voici les recettes proposées" %>
-<% end %>
+          <%= form.submit "Rechercher des recettes", class: "btn btn-primary w-100" %>
+        <% end %>
 
-<% if @recipe %>
-  <h2>Suggested Recipe:</h2>
+        <% if @recipe %>
+        <h2>Suggested Recipe:</h2>
 
-<% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

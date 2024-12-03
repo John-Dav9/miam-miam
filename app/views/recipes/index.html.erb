@@ -1,10 +1,11 @@
 <h1>Liste des recettes</h1>
 
 <% if @recipes.any? %>
-  <ul>
+  <ul class="recipe-list">
+
     <% @recipes.each do |recipe| %>
-      <li>
-        <%= link_to recipe.title, recipe_path(recipe) %>
+      <li class="recipe-item">
+        <%= link_to recipe.title, recipe_path(recipe), class: "recipe-link" %>
       </li>
     <% end %>
   </ul>

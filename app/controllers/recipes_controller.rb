@@ -1,9 +1,11 @@
 class RecipesController < ApplicationController
+
   def index
     @recipes = Recipe.all
   end
 
   def new
+    
   end
 
   def proposition
@@ -16,22 +18,49 @@ class RecipesController < ApplicationController
 
 
       # Connect to OpenAI
-      # client = OpenAI::Client.new
-      # response = client.chat(
-        #   parameters: {
-          #     model: "gpt-3.5-turbo",
-          #     messages: [
-            #       { role: "system", content: "You are a recipe suggestion assistant." },
-            #       { role: "user", content: "Here are some ingredients: #{ingredients}. I want a recipe with #{difficulty} difficulty." }
-            #     ]
-            #   }
-            # )
+      client = OpenAI::Client.new
+      response = client.chat(
+          parameters: {
+              model: "gpt-3.5-turbo",
+              messages: [
+                  { role: "system", content: PROMPT },
+                  { role: "user", content: "J'ai ces ingredients: #{ingredients}. Difficulté #{difficulty}" }
+                ]
+              }
+            )
 
-            # recipe_content = response.dig("choices", 0, "message", "content")
+            recipes_content = response.dig("choices", 0, "message", "content")
 
-            # # Parse response (you can make this more robust)
-            # @recipe = recipe_content
+            # Parse response (you can make this more robust)
+            @recipes = recipes_content
+
       redirect_to root_path
     end
   end
 end
+
+PROMPT = '
+          Je vais te fournir une liste d\'ingrédients, avec ou sans quantités, et préciser un niveau de difficulté pour les recettes que je veux obtenir.
+          Tu devras me proposer 5 recettes qui correspondent aux critères suivants :
+
+          1. Utilisation des ingrédients fournis : Les recettes doivent inclure les ingrédients spécifiés. Ne pas prendre en compte les condiments.
+
+          2. Sélection par difficulté : Les recettes doivent être adaptées au niveau de difficulté choisi (facile, moyenne ou difficile).
+
+          3. Fournis des étapes claires pour réaliser chaque recette.
+
+        mettre la réponse sous se format :
+        [
+        {
+        "nom de la recette" =>  {
+            "ingredients" =>{
+                "pommes" => 2
+
+            },
+            {
+            "steps" => ["1. Pelez et coupez les pommes en tranches.", "steps2", ...]
+            }
+        }
+        },
+        rec2,rec3]
+        '
