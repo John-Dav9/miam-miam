@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.2].define(version: 2024_12_02_165655) do
   create_table "ingredients", force: :cascade do |t|
     t.string "nom"
@@ -32,6 +33,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_02_165655) do
     t.datetime "updated_at", null: false
   end
 
+=======
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_142016) do
+>>>>>>> d5d6b679c7f4f9184ec24d720444326045b9f404
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -40,6 +44,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_02_165655) do
     t.string "steps"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
