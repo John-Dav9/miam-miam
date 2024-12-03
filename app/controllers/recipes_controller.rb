@@ -1,11 +1,17 @@
 class RecipesController < ApplicationController
 
   def index
-    @recipes = Recipe.all
+    @recipes = []
+    JSON.parse(session[:recipes]).each do |recipe|
+      @recipes << {
+        title: recipe.first.first,
+        steps: recipe.first[1]["steps"]
+      }
+    end
   end
 
   def new
-    
+
   end
 
   def proposition
@@ -32,8 +38,8 @@ class RecipesController < ApplicationController
             recipes_content = response.dig("choices", 0, "message", "content")
 
             # Parse response (you can make this more robust)
-            @recipes = recipes_content
 
+            session[:recipes] = recipes_content
       redirect_to root_path
     end
   end
@@ -52,13 +58,13 @@ PROMPT = '
         mettre la réponse sous se format :
         [
         {
-        "nom de la recette" =>  {
-            "ingredients" =>{
-                "pommes" => 2
+        "nom de la recette" :  {
+            "ingredients" :{
+                "pommes" : 2
 
             },
             {
-            "steps" => ["1. Pelez et coupez les pommes en tranches.", "steps2", ...]
+            "steps" : ["1. Pelez et coupez les pommes en tranches.", "steps2", ...]
             }
         }
         },
