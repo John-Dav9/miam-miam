@@ -1,31 +1,37 @@
+<div class="my-container">
+  <div class="title-header">
+      <h1 class="text-center">Liste Des Recettes</h1>
+  </div>
+  <div class= "content">
 
-<h1 class="text-center mt-5 mb-5">Liste Des Recettes</h1>
-
-<div class="container">
-  <div class="row">
-    <% if @recipes %>
-      <% @recipes.each do |recipe| %>
-        <div class="col-md-4 mb-4"> <!-- Chaque card occupe 4 colonnes -->
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">Title: <%= recipe[:title] %></h5>
-              <ul class="list-unstyled">
-                <% recipe[:steps].each do |step| %>
-                  <li class="card-text">- <%= step %></li>
-                <% end %>
-              </ul>
+    <div class="row">
+      <% if @recipes %>
+        <% @recipes.each do |recipe| %>
+          <div class="col-md-4 mb-4"> <!-- Chaque card occupe 4 colonnes -->
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= recipe[:title] %></h5>
+                <hr>
+                <ul class="list-unstyled">
+                  <% recipe[:steps].each do |step| %>
+                    <li class="card-text">- <%= step %></li>
+                  <% end %>
+                </ul>
+              </div>
             </div>
           </div>
+        <% end %>
+      <% else %>
+        <div class="col-12">
+          <p class="text-center">Aucune recette n'a été trouvée.</p>
         </div>
       <% end %>
-    <% else %>
-      <div class="col-12">
-        <p class="text-center">Aucune recette n'a été trouvée.</p>
-      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-4">
+    <%= link_to recipes_new_path do %>
+      <button class="bottom-button">Nouvelle recette</button>
     <% end %>
   </div>
-</div>
-
-<div class="text-center mt-4">
-  <%= link_to "Nouvelle recette", recipes_new_path, class: "btn btn-primary" %>
 </div>

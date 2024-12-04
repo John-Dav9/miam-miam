@@ -13,41 +13,44 @@
  *
  *= require_tree .
  *= require_self
- */
- .recipes-list {
-  list-style-type: none;
-  padding: 0;
-}
-.recipe-item {
-  margin: 10px 0;
+
+ /* css pour la page index */
+.my-container {
+  margin: auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  max-width: 80vw;
 }
-.recipe-link {
-  text-decoration: none;
-  color: #7b7d7f;
+
+.title-header h1 {
+  text-shadow: #000 0px 0 8px;
+  font-size: 3.5rem;
+  color: #4a4b4c;
 }
-.recipe-link:hover {
-  text-decoration: underline;
+
+.title-header {
+  margin-top: 25px;
 }
- body {
-  background-color: #ffffff;
+
+label {
+  font-size: 25px;
+}
+
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(47, 47, 47, 0.368)),
+                  url("plums-2724160.jpg");
+  text-shadow: #000 1px 1px 6px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #0c0c0c;
   font-family: Arial, sans-serif;
 }
 
-.custom-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.video-container {
-  background-color: #1f1f2e;
-  padding: 20px;
-  border-radius: 10px;
-}
 
 .form-container {
   background-color: #7f7fa0;
@@ -66,8 +69,9 @@
 }
 
 .difficulty-option {
-  padding: 30px
+  padding: 30px;
 }
+
 
 .card {
   background-color: #73578e;
@@ -89,10 +93,79 @@
 
 .btn-primary {
   background-color: #4a4b4c;
-  border-color: #fefeff;
+  border-color: #6f6f75;
+
 }
 
 .btn-primary:hover {
   background-color: #7b7d7f;
   border-color: #7b7d7f;
+}
+
+
+/* Bouton */
+.bottom-button {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #4a4b4c;
+  color: #fbfbfc;
+  border: none;
+  border-radius: 5px;
+}
+
+
+.bottom-button:hover {
+  background-color:#292929;
+}
+/* index css end */
+
+
+
+
+/* Vidéos */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* Formulaire */
+.form-container {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 500px;
+  color:#ffffff
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-control-lg {
+  font-size: 1.3rem;
+  padding: 0.75rem;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+  padding: 0.75rem 1.5rem;
 }

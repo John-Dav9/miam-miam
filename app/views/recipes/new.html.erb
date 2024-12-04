@@ -1,37 +1,54 @@
-<div class="container custom-container">
-  <div class="row w-100">
-    <!-- Section Vidéo -->
-    <div class="col-md-6 d-flex justify-content-center align-items-center">
-      <div class="video-container w-100">
-        <video controls class="w-100 rounded">
-          <source src="your-video-file.mp4" type="video/mp4">
-
-        </video>
-        <p class="text-center mt-2">Découvrez nos meilleures recettes !</p>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="form-container">
-        <h1 class="form-title text-center">Votre générateur de recettes intelligent !</h1>
-        <%= form_with url: recipes_path, method: :post, local: true do |form| %>
-          <div class="mb-3">
-            <%= form.label :ingredients, "Ingrédients : " %>
-            <%= form.text_field :ingredients, class: "form-control", placeholder: "Entrez vos ingrédients" %>
-          </div>
-          <div class="difficulty-option">
-    <%= label_tag :difficulty, "Selectionnez la difficulté:" %>
-    <%= select_tag :difficulty, options_for_select(["Facile", "Moyenne", "Difficile"]) %>
+  <div class="video-background">
+    <video id="bg-video" autoplay muted playsinline class="bg-video">
+      <source id="video-source" src="https://cdn.pixabay.com/video/2023/02/07/149665-796691048_small.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la lecture des vidéos.
+    </video>
   </div>
 
-          <%= form.submit "Rechercher des recettes", class: "btn btn-primary w-100" %>
-        <% end %>
-
-        <% if @recipe %>
-        <h2>Suggested Recipe:</h2>
-
-        <% end %>
-      </div>
+  <div class="form-container">
+    <div class="text-center">
+      <h1 class="form-title">Votre générateur de recettes intelligent!</h1>
+      <form action="/recipes" method="post">
+        <div class="mb-3">
+          <label for="ingredients" class="mb-3">Ingrédients :</label>
+          <input type="text" id="ingredients" name="ingredients" class="form-control form-control-lg" placeholder="Entrez vos ingrédients">
+        </div>
+        <div class="difficulty-option mb-3">
+          <label for="difficulty" class="mb-3">Sélectionnez la difficulté :</label>
+          <select id="difficulty" name="difficulty" class="form-control form-control-lg">
+            <option>Facile</option>
+            <option>Moyenne</option>
+            <option>Difficile</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Rechercher des recettes</button>
+      </form>
     </div>
   </div>
-</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const videoElement = document.getElementById("bg-video");
+      const videoSource = document.getElementById("video-source");
+
+      // Liste des vidéos à enchaîner
+      const videos = [
+        "https://cdn.pixabay.com/video/2023/02/07/149665-796691048_small.mp4",
+        "https://cdn.pixabay.com/video/2017/08/29/11620-231571928.mp4",
+        "https://cdn.pixabay.com/video/2024/02/11/200157-912127896.mp4",
+      ];
+
+      let currentIndex = 0;
+
+      // Passer à la vidéo suivante
+      function playNextVideo() {
+        currentIndex = (currentIndex + 1) % videos.length; // Boucle sur les vidéos
+        videoSource.src = videos[currentIndex]; // Change la source de la vidéo
+        videoElement.load(); // Recharge la vidéo
+        videoElement.play(); // Reprend la lecture
+      }
+
+      // Écoute l'événement de fin de vidéo
+      videoElement.addEventListener("ended", playNextVideo);
+    });
+  </script>
