@@ -12,11 +12,12 @@
               <div class="card-body">
                 <h5 class="card-title"><%= recipe[:title] %></h5>
                 <hr>
-                <ul class="list-unstyled">
+                   <%= image_tag recipe[:photo], alt: "AI-generated image of the recipe" %> 
+                <ol class="list-unstyled">
                   <% recipe[:steps].each do |step| %>
-                    <li class="card-text">- <%= step %></li>
+                    <li class="card-text"> <%= step %></li>
                   <% end %>
-                </ul>
+                </ol>
               </div>
             </div>
           </div>

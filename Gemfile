@@ -5,7 +5,7 @@ gem 'ruby-openai'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
-
+gem "cloudinary"
 gem "devise"
 gem "simple_form"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
