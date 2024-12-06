@@ -39,27 +39,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_132902) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "ingredients", force: :cascade do |t|
-    t.string "nom"
-    t.string "quantité"
-    t.integer "recettes_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recettes_id"], name: "index_ingredients_on_recettes_id"
-  end
-
-  create_table "recettes", force: :cascade do |t|
-    t.string "nom"
-    t.string "description"
-    t.string "categorie"
-    t.string "durée"
-    t.string "pays"
-    t.string "ingredients"
-    t.string "préparation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -93,5 +72,4 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_05_132902) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "ingredients", "recettes", column: "recettes_id"
 end
