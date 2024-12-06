@@ -1,32 +1,17 @@
 class RecipesController < ApplicationController
+
   def index
     @recipes = []
     JSON.parse(session[:recipes]).each do |recipe|
-      photo = image(recipe[:title])
-      
-      title = recipe.keys.first
-      steps = recipe[title]["steps"]
-      photo = image(title)
-
       @recipes << {
-        title: title,
-        steps: steps,
-        photo: photo
+        title: recipe.first.first,
+        steps: recipe.first[1]["steps"]
       }
     end
   end
 
   def new
-  end
 
-  def image(name)
- 
-      client = OpenAI::Client.new
-      response = client.images.generate(parameters: {
-        prompt: "A recipe image of #{name}", size: "256x256"
-      })
-      url = response.dig("data", 0 ,"url")
-      url
   end
 
   def proposition
